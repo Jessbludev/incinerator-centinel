@@ -2,13 +2,18 @@
 all-features = true
 
 [advisories]
-vulnerability = "deny"
-unmaintained = "warn"
+version = 2
+unmaintained = "workspace"
 yanked = "deny"
-notice = "warn"
 
 [licenses]
-allow = ["Apache-2.0", "MIT", "BSD-3-Clause", "ISC", "Unicode-DFS-2016"]
+version = 2
+allow = [
+  "Apache-2.0",
+  "MIT",
+  "Unicode-3.0",
+  "CC0-1.0",
+]
 confidence-threshold = 0.9
 
 [bans]
