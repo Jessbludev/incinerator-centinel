@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Incinerator Sentinel
 
-use crate::{config::ServiceConfig, Result, SentinelError};
+use crate::{Result, SentinelError, config::ServiceConfig};
 
 #[derive(Debug, Default)]
 pub struct Enforcer;

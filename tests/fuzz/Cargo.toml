@@ -1,0 +1,21 @@
+[package]
+name = "incinerator-sentinel-fuzz"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+incinerator-sentinel = { path = "../.." }
+
+[workspace]
+
+[[bin]]
+name = "policy_parser"
+path = "fuzz_targets/policy_parser.rs"
+test = false
+doc = false
+bench = false

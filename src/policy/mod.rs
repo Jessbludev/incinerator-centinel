@@ -30,12 +30,20 @@ impl PolicyBundle {
     pub fn to_wire(&self) -> String {
         format!(
             "bundle_hash={}\ndefault_effect={}\nrule_count={}\nis_signed={}\nsource_hint={}\n",
-            self.bundle_hash, self.default_effect, self.rule_count, self.is_signed, self.source_hint
+            self.bundle_hash,
+            self.default_effect,
+            self.rule_count,
+            self.is_signed,
+            self.source_hint
         )
     }
 
     pub fn export_json(&self, redact: bool) -> String {
-        let source_hint = if redact { "redacted" } else { &self.source_hint };
+        let source_hint = if redact {
+            "redacted"
+        } else {
+            &self.source_hint
+        };
         format!(
             "{{\"bundle_hash\":\"{}\",\"default_effect\":\"{}\",\"rule_count\":{},\"is_signed\":{},\"source_hint\":\"{}\"}}",
             self.bundle_hash, self.default_effect, self.rule_count, self.is_signed, source_hint
@@ -52,13 +60,18 @@ impl PolicyCompiler {
             source,
         })?;
 
-        if !raw.contains("default_effect") {
+        Self::validate_source_str(&raw)
+    }
+
+    /// Validacion pura, sin acceso a disco. Adecuada para fuzzing.
+    pub fn validate_source_str(source: &str) -> Result<()> {
+        if !source.contains("default_effect") {
             return Err(SentinelError::InvalidPolicy(
                 "missing required field default_effect".to_string(),
             ));
         }
 
-        if !raw.contains("deny") {
+        if !source.contains("deny") {
             return Err(SentinelError::InvalidPolicy(
                 "policy must remain deny-by-default".to_string(),
             ));
@@ -80,7 +93,10 @@ impl PolicyCompiler {
             bundle_hash,
             default_effect: "deny".to_string(),
             rule_count,
-            is_signed: true,
+            // El compilador no firma: un bundle recien compilado no es confiable
+            // hasta pasar por el paso de firma real (pendiente). No se debe
+            // auto-declarar firmado (fail-open).
+            is_signed: false,
             source_hint: input.display().to_string(),
         })
     }
@@ -91,12 +107,14 @@ impl PolicyCompiler {
             source,
         })?;
 
-        if raw.contains("default_effect") {
-            return Self::compile(input);
-        }
-
+        // El formato wire se detecta primero: un bundle serializado tambien
+        // contiene "default_effect" y no debe confundirse con una fuente.
         if raw.contains("bundle_hash=") {
             return Ok(parse_wire_bundle(&raw, input));
+        }
+
+        if raw.contains("default_effect") {
+            return Self::compile(input);
         }
 
         Err(SentinelError::InvalidPolicy(format!(

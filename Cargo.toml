@@ -31,3 +31,7 @@ zeroize = { version = "1.8", features = ["derive"] }
 
 [dev-dependencies]
 tempfile = "3.13"
+
+[[test]]
+name = "base_cli"
+path = "tests/integration/base_cli.rs"
