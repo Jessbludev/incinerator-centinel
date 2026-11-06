@@ -1,0 +1,21 @@
+/target/
+/dist/
+**/*.rs.bk
+
+# Secretos y material de firma: nunca versionar
+*.key
+*.pem
+*.pub
+!/toolkit/keys/README.md
+
+# Artefactos locales
+*.bundle
+*.tar.zst
+*.sig
+sbom.cdx.json
+provenance.intoto.jsonl
+
+# Entorno
+.env
+.idea/
+.vscode/
