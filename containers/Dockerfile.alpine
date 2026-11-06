@@ -1,0 +1,25 @@
+# Imagen Alpine/musl: binario estatico sobre base minima.
+FROM rust:1.85-alpine AS builder
+
+RUN apk add --no-cache musl-dev
+
+WORKDIR /src
+COPY . .
+
+RUN cargo build --release --locked \
+      --target x86_64-unknown-linux-musl \
+      --no-default-features \
+      --features hardened,volatile-audit
+
+FROM alpine:3.20
+
+RUN adduser -D -H -s /sbin/nologin incinerator-sentinel
+
+COPY --from=builder \
+  /src/target/x86_64-unknown-linux-musl/release/incinerator-sentinel \
+  /usr/bin/incinerator-sentinel
+
+USER incinerator-sentinel
+
+ENTRYPOINT ["/usr/bin/incinerator-sentinel"]
+CMD ["--help"]

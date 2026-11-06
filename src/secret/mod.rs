@@ -8,6 +8,12 @@ pub struct SecretBroker {
     session_material: Zeroizing<Vec<u8>>,
 }
 
+impl Default for SecretBroker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SecretBroker {
     pub fn new() -> Self {
         Self {

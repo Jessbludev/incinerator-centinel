@@ -1,6 +1,11 @@
-/target/
+**/target/
 /dist/
 **/*.rs.bk
+
+# cargo-fuzz
+tests/fuzz/corpus/
+tests/fuzz/artifacts/
+tests/fuzz/target/
 
 # Secretos y material de firma: nunca versionar
 *.key

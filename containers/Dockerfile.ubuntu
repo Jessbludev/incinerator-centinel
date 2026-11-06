@@ -1,0 +1,22 @@
+# Imagen Ubuntu: build en Ubuntu, runtime minimo con usuario sin privilegios.
+FROM rust:1.85-slim AS builder
+
+WORKDIR /src
+COPY . .
+
+RUN cargo build --release --locked \
+      --no-default-features \
+      --features hardened,volatile-audit
+
+FROM ubuntu:24.04
+
+RUN useradd --system --no-create-home --shell /usr/sbin/nologin incinerator-sentinel
+
+COPY --from=builder \
+  /src/target/release/incinerator-sentinel \
+  /usr/bin/incinerator-sentinel
+
+USER incinerator-sentinel
+
+ENTRYPOINT ["/usr/bin/incinerator-sentinel"]
+CMD ["--help"]

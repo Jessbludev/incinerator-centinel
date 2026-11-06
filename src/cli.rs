@@ -9,6 +9,7 @@ use std::{
 use clap::{Args, Parser, Subcommand};
 
 use crate::{
+    Result, SentinelError,
     attest::Attestor,
     audit::VolatileAudit,
     config::ServiceConfig,
@@ -17,7 +18,6 @@ use crate::{
     incinerate::Incinerator,
     policy::{PolicyBundle, PolicyCompiler},
     secret::SecretBroker,
-    Result, SentinelError,
 };
 
 #[derive(Debug, Parser)]
@@ -53,14 +53,20 @@ pub struct SelftestArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum ConfigAction {
-    Validate { #[arg(long)] input: PathBuf },
+    Validate {
+        #[arg(long)]
+        input: PathBuf,
+    },
     Compile {
         #[arg(long)]
         input: PathBuf,
         #[arg(long)]
         output: PathBuf,
     },
-    Verify { #[arg(long)] bundle: PathBuf },
+    Verify {
+        #[arg(long)]
+        bundle: PathBuf,
+    },
     Export {
         #[arg(long)]
         bundle: PathBuf,
