@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Guardaceniza, mascota de Incinerator Sentinel">
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A3340"/>
+      <stop offset="1" stop-color="#0B0F14"/>
+    </linearGradient>
+
+    <linearGradient id="ember" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Hombros blindados -->
+  <path
+    d="M36 188 L78 154 L128 176 L178 154 L220 188 L204 224 L128 208 L52 224 Z"
+    fill="#151B24"
+    stroke="#8A94A6"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+
+  <!-- Cuello técnico -->
+  <rect
+    x="108"
+    y="142"
+    width="40"
+    height="34"
+    fill="#0B0F14"
+    stroke="#8A94A6"
+    stroke-width="3"
+  />
+
+  <!-- Casco hexagonal tipo horno -->
+  <path
+    d="M128 20 L190 54 L190 118 L128 156 L66 118 L66 54 Z"
+    fill="url(#steel)"
+    stroke="#8A94A6"
+    stroke-width="4"
+    stroke-linejoin="round"
+  />
+
+  <!-- Placa facial sellada -->
+  <path
+    d="M128 40 L172 64 L172 112 L128 140 L84 112 L84 64 Z"
+    fill="#0B0F14"
+    stroke="#8A94A6"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+
+  <!-- Visor ámbar horizontal -->
+  <rect
+    x="104"
+    y="82"
+    width="48"
+    height="10"
+    rx="5"
+    fill="url(#ember)"
+  />
+
+  <!-- Rendija vertical central -->
+  <rect
+    x="124"
+    y="70"
+    width="8"
+    height="34"
+    rx="4"
+    fill="#F59E0B"
+    opacity="0.85"
+  />
+
+  <!-- Rejillas laterales -->
+  <path d="M96 112 L112 122 L112 130 L96 120 Z" fill="#8A94A6"/>
+  <path d="M160 112 L144 122 L144 130 L160 120 Z" fill="#8A94A6"/>
+
+  <!-- Rejilla inferior -->
+  <path d="M118 126 L138 126 L134 136 L122 136 Z" fill="#8A94A6"/>
+
+  <!-- Emblema torácico hexagonal -->
+  <path
+    d="M128 176 L154 190 L154 216 L128 230 L102 216 L102 190 Z"
+    fill="#0B0F14"
+    stroke="#8A94A6"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+
+  <!-- Llama contenida -->
+  <path
+    d="M128 188
+       C136 196 140 202 136 210
+       C142 206 144 198 138 190
+       C134 186 130 186 128 188 Z"
+    fill="url(#ember)"
+  />
+
+  <!-- Candado simplificado -->
+  <rect x="120" y="206" width="16" height="12" rx="2" fill="#8A94A6"/>
+  <path
+    d="M124 206 V202 a4 4 0 0 1 8 0 V206"
+    fill="none"
+    stroke="#8A94A6"
+    stroke-width="3"
+  />
+</svg>

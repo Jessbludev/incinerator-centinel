@@ -1,0 +1,28 @@
+version = 1
+mode = "strict"
+default_effect = "deny"
+
+[attestation]
+required = true
+max_age = "5m"
+require_signed_bundle = true
+
+[governance]
+quorum = 2
+of = 3
+max_ttl = "1h"
+allow_wildcards = false
+
+[[rule]]
+id = "critical-api-restart"
+description = "Permite reiniciar una API critica bajo attestation valida."
+subject = { principal = "operator", service = "api-critical" }
+object = { systemd_unit = "api-critical.service" }
+action = "restart"
+effect = "allow"
+ttl = "15m"
+
+[rule.conditions]
+measurement_ok = true
+debug_disabled = true
+network_egress_denied = true
